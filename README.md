@@ -44,7 +44,7 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
   ```
 - Configure as credenciais no arquivo `application.yml` ou `application.properties`:
 
-  ```properties
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/your_database_name?currentSchema=schema_name
 spring.datasource.username=your_username
 spring.datasource.password=your_password

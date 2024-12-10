@@ -13,8 +13,8 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
 ---
 
 ## **Tecnologias Utilizadas**
-- **Java 17**
-- **Spring Boot 3.x**
+- **Java 11**
+- **Spring Boot 2.x**
     - Spring Data JPA
     - Spring Cache
     - Spring Web
@@ -26,7 +26,7 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
 
 ## **Pré-requisitos**
 
-1. **Java 17 ou superior**
+1. **Java 11 ou superior**
 2. **Maven** (para construção do projeto)
 3. **PostgreSQL 14** instalado e configurado
 4. **Redis** instalado e em execução

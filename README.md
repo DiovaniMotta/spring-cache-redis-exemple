@@ -42,35 +42,32 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
   ```sql
   CREATE DATABASE nome_do_banco;
   ```
-- Configure as credenciais no arquivo `application.yml` ou `application.properties`:
+- Configure as credenciais no arquivo `application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/your_database_name?currentSchema=schema_name
 spring.datasource.username=your_username
 spring.datasource.password=your_password
-  ```
+```
 
 ### **2. Redis**
 
 #### **Instalação no Windows**
-1. Baixe o Redis para Windows a partir do [site oficial do Redis](https://github.com/microsoftarchive/redis/releases).
-2. Extraia o conteúdo do arquivo baixado.
-3. Execute o Redis Server:
-    - Navegue até a pasta extraída e execute o comando no terminal:
-      ```cmd
-      redis-server.exe redis.windows.conf
-      ```
+1. Seguir as orientações para instalação em ambiente Windows na [documentação do Redis](https://redis.io/docs/latest/operate/oss_and_stack/install/install-redis/install-redis-on-windows/).
+2. Após a instalação, inicie o servidor Redis:
+
+```shell
+  sudo service redis-server start
+```
 
 #### **Configuração do Redis no projeto**
-Adicione as configurações no `application.yml` ou `application.properties`:
+Adicione as configurações no `application.properties`:
 
-```yaml
-spring:
-  cache:
-    type: redis
-  redis:
-    host: localhost
-    port: 6379
+```properties
+spring.redis.host=localhost
+spring.redis.port=6379
+spring.redis.password=
+spring.redis.database=0
 ```
 
 ### **3. Redis Insight**
@@ -89,12 +86,12 @@ spring:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
+   git clone https://github.com/DiovaniMotta/spring-cache-redis-exemple.git
    ```
 
 2. Navegue até o diretório do projeto:
    ```bash
-   cd seu-repositorio
+   cd spring-cache-redis-exemple
    ```
 
 3. Compile e execute o projeto:
@@ -114,7 +111,7 @@ spring:
 2. **Listar Nomes Paginados:**
     - **GET** `/api/objects/names/{page}`
 3. **Listar IDs e Nomes:**
-    - **GET** `/api/objects/id-names/{page}`
+    - **GET** `/api/objects/basic/{page}`
 
 ---
 

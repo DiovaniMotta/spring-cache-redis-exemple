@@ -19,11 +19,11 @@ public class CacheService {
 
     CacheManager cacheManager;
 
-    @Scheduled(fixedDelay = 300000)
+    @Scheduled(fixedDelay = 3600000)
     public void clearCache() {
         System.err.println("Executando limpeza agendada do cache");
         Cache objectsCache = cacheManager.getCache("objects_S3_id_names");
-        if(Objects.nonNull(objectsCache)) {
+           if(Objects.nonNull(objectsCache)) {
             System.err.println("Cache objects_S3_id_names limpo!");
             objectsCache.clear();
         }

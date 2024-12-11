@@ -10,10 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -50,9 +48,6 @@ public class ObjectS3Service {
         Pageable pageable = PageRequest.of(page, size);
         var recordsPageable = repository.findAll(pageable);
         var contents = recordsPageable.getContent();
-        if(Objects.isNull(contents)) {
-            return Collections.emptyMap();
-        }
         return contents.stream()
                 .collect(Collectors.toMap(ObjectS3::getId, ObjectS3::getFileName));
     }

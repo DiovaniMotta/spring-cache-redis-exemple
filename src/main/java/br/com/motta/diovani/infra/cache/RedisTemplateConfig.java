@@ -8,6 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -79,14 +80,14 @@ public class RedisTemplateConfig {
 
     @Bean
     @Primary
-    public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+    public CacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisSerializer<Object> jsonSerializer = createJsonSerializer();
 
         SerializationPair<Object> serializationPair = SerializationPair.fromSerializer(jsonSerializer);
         RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
                 .serializeValuesWith(serializationPair)
-                .prefixKeysWith("hcm/spring-cache-redis:");
+                .prefixKeysWith("hcm:spring-cache-redis:");
 
         return RedisCacheManager.builder(redisConnectionFactory)
                 .cacheDefaults(cacheConfig)

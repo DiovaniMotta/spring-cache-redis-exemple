@@ -18,11 +18,9 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext.SerializationPair;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StringUtils;
 
@@ -62,20 +60,6 @@ public class RedisTemplateConfig {
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
         return new GenericJackson2JsonRedisSerializer(mapper);
-    }
-
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-
-        RedisSerializer<Object> jsonSerializer = createJsonSerializer();
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(jsonSerializer);
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(jsonSerializer);
-
-        return template;
     }
 
     @Bean

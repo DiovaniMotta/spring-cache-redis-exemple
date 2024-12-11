@@ -42,6 +42,7 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
 
 ```sql
   CREATE DATABASE nome_do_banco;
+  CREATE EXTENSION uuid-ossp;
   CREATE TABLE objects_from_s3 (
 	id uuid DEFAULT uuid_generate_v4() NOT NULL,
 	"path" varchar(1000) NULL,

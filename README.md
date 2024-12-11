@@ -39,9 +39,22 @@ Este projeto é uma API Spring Boot que utiliza **Spring Data** para interagir c
 ### **1. Banco de Dados PostgreSQL**
 
 - Crie o banco de dados necessário para o projeto:
-  ```sql
+
+```sql
   CREATE DATABASE nome_do_banco;
-  ```
+  CREATE TABLE objects_from_s3 (
+	id uuid DEFAULT uuid_generate_v4() NOT NULL,
+	"path" varchar(1000) NULL,
+	tenant varchar(1000) NULL,
+	object_id varchar(1000) NULL,
+	file_name varchar(1000) NULL,
+	last_modified_date timestamp NULL,
+	file_size_byte int8 NULL,
+	CONSTRAINT objects_from_s3_pkey PRIMARY KEY (id)
+  );
+  CREATE INDEX objects_from_s3_object_idx2 ON objects_from_s3 USING btree (object_id);
+  CREATE INDEX objects_from_s3_tenant_idx1 ON objects_from_s3 USING btree (tenant, object_id);
+```
 - Configure as credenciais no arquivo `application.properties`:
 
 ```properties
@@ -112,7 +125,8 @@ spring.redis.database=0
     - **GET** `/api/objects/names/{page}`
 3. **Listar IDs e Nomes:**
     - **GET** `/api/objects/basic/{page}`
-
+4. **Remover registros do cache:**
+    - **GET** `/api/cache/clear/{name}`
 ---
 
 ## **Monitoramento do Cache com Redis Insight**
